@@ -1,0 +1,59 @@
+{
+    "HeaderRadarCard": [
+        {
+            "_id": {
+                "$oid": "6125049d8e217ede53eba63b"
+            },
+            "nome": "Ali",
+            "foto": "https://www.childfundbrasil.org.br/blog/wp-content/uploads/2017/12/DSC0174.jpg"
+        }
+    ],
+    "MediaDaPopulacao": [
+        {
+            "_id": "totalglobal",
+            "mediafinal": 5.666666666666667
+        }
+    ],
+    "RadarChartCard": [
+        {
+            "_id": {
+                "$oid": "5d890ddb05f65839b115a863"
+            },
+            "corpo": "8",
+            "mente": "2",
+            "emocoes": "5",
+            "username": "robson@mia",
+            "cpf": "912345",
+            "paciente": "6125049d8e217ede53eba63b",
+            "datatres": {
+                "$date": 1603386043019
+            }
+        }
+    ],
+    "LinesChartCard": [
+        {
+            "_id": {
+                "$oid": "5dc0dfd14d6f6fcb1f616c4b"
+            },
+            "resultado": 33.333333333333336,
+            "category": "mente",
+            "data": "2019-11-09"
+        },
+        {
+            "_id": {
+                "$oid": "5dc0df684d6f6fcb1f616c4a"
+            },
+            "resultado": 33.333333333333336,
+            "category": "mente",
+            "data": "2019-11-05"
+        },
+        {
+            "_id": {
+                "$oid": "5dc0e10e0f3644497ef76a4a"
+            },
+            "resultado": 100.0,
+            "category": "mente",
+            "data": "2019-11-05"
+        }
+    ]
+}

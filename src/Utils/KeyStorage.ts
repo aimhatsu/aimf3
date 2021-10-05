@@ -1,0 +1,1 @@
+export const Storage_Token = "@storage_token";

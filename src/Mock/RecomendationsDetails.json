@@ -1,0 +1,46 @@
+{
+    "DetalhesDoTratamento": [
+        {
+            "_id": {
+                "$oid": "5df8ebcf88cbab15961bfbc8"
+            },
+            "categoria": "mente",
+            "arquivo": "psicologo.jpg",
+            "video": "https://www.youtube.com/watch?v=aqoF8vFwEkY",
+            "tratamento": "Terapia com psic\u00f3logo",
+            "title1": "Porqu\u00ea?",
+            "txt1": "Voc\u00ea pensa muito, e isso \u00e9 bom, mas um psic\u00f3logo pode te ajudar a ser mais feliz e s\u00e1bio.",
+            "title2": "Indica\u00e7\u00e3o",
+            "txt2": "Controle emocional, Reduzir os efeitos de stress, Combate a depress\u00e3o",
+            "quantidade": "sess\u00f5es sob consulta"
+        }
+    ],
+    "EspecialistaIndicado": [
+        {
+            "_id": {
+                "$oid": "5dee81c717bd9774c14c104c"
+            },
+            "nome": "Anderson Lima",
+            "snome": "Pereira",
+            "especialidade": "Medicina Tradicional Chinesa",
+            "estado": "PR",
+            "cidade": "Ivaipor\u00e3",
+            "endereco": "Rua Castro Alves, 164, centro",
+            "servicos": [
+                {
+                    "servico": "Yoga",
+                    "duracao": "00:40"
+                },
+                {
+                    "servico": "Massagem",
+                    "duracao": "00:40"
+                },
+                {
+                    "servico": "Acupuntura",
+                    "duracao": "00:40"
+                }
+            ],
+            "cep": "86870-000"
+        }
+    ]
+}
