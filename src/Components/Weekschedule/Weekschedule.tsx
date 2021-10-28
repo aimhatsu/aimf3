@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import moment from 'moment';
 import { StringUtils } from '../../Utils/StringUtils';
 import { DateUtils } from '../../Utils/DateUtils';
@@ -32,13 +32,15 @@ const Weekschedule = (props: any): JSX.Element => {
       Api({
         method: 'post',
         url: `agendar/${props.tratamento}/Ivaipora`,
+        // Após remover a cidade usar o código abaixo
+        // url: `agendar/${props.tratamento}`,
         headers: {
           bearer: storageData,
         },
         data: data,
       })
         .then(async (res) => {
-          console.log(`res`, res);
+          Alert.alert('Agendamento', 'Realizado com sucesso!');
 
           setLoader(false);
         })
