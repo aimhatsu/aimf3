@@ -1,114 +1,84 @@
-import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, Text, View, Alert } from 'react-native';
-import moment from 'moment';
-import { StringUtils } from '../../Utils/StringUtils';
-import { DateUtils } from '../../Utils/DateUtils';
-import IconWeek from './Components/IconWeek';
-import { Loader } from '../Loader/Loader';
-import Api from '../../Utils/Api';
-import { Storage_Token } from '../../Utils/KeyStorage';
+import React from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StringUtils } from "../../Utils/StringUtils";
+import { DateUtils } from "../../Utils/DateUtils";
+import IconWeek from "./Components/IconWeek";
+
 
 const Weekschedule = (props: any): JSX.Element => {
-  const { item } = props;
-  const [loader, setLoader] = useState<boolean>(false);
+    const { item } = props;
 
-  const agendar = (item: any, hour: any) => {
-    var data = new FormData();
-    const splitHour = hour.split(':');
-    const dateIso = moment(
-      new Date(
-        new Date().getFullYear(),
-        item.item.month,
-        item.item.day,
-        splitHour[0],
-        splitHour[1]
-      )
-    ).format('YYYY-MM-DDTHH:mm:ss.sss-0300');
-    data.append('dataiso', dateIso);
+    const renderItem = (item: any) => {
+        if (item.item.active) {
+            return (
+                <IconWeek hour={item.item.hour} />
+            )
 
-    setLoader(true);
-    AsyncStorage.getItem(Storage_Token).then((storageData) => {
-      Api({
-        method: 'post',
-        url: `agendar/${props.tratamento}/Ivaipora`,
-        // Após remover a cidade usar o código abaixo
-        // url: `agendar/${props.tratamento}`,
-        headers: {
-          bearer: storageData,
-        },
-        data: data,
-      })
-        .then(async (res) => {
-          Alert.alert('Agendamento', 'Realizado com sucesso!');
+        }
+        return (<></>)
+    };
 
-          setLoader(false);
-        })
-        .catch((err) => console.log(err));
-    });
-  };
+    return (
+        <View style={styles.container}>
+            <View style={styles.containerWeek}>
 
-  return (
-    <>
-      <Loader loading={loader} />
-      <View style={styles.container}>
-        <View style={styles.containerWeek}>
-          <View style={styles.containerDay}>
-            <Text style={styles.dayNumberSelected}>
-              {DateUtils.toNameMonth(item.item.month)} {item.item.day}
-            </Text>
-            <Text style={styles.daySelected}>
-              {StringUtils.capitalized(item.item.dayWeek)}
-            </Text>
-          </View>
+                <View style={styles.containerDay}>
+                    <Text style={styles.dayNumberSelected} >
+                        {DateUtils.toNameMonth(item.item.month)} {item.item.day}
+                    </Text>
+                    <Text style={styles.daySelected}>
+                        {StringUtils.capitalized(item.item.dayWeek)}-feira
+                    </Text>
+                </View>
 
-          <View style={styles.grid}>
-            {props.item.item.officeHour1.map(
-              (item: any) =>
-                !item.unavailable && (
-                  <IconWeek
-                    key={item.id}
-                    hour={item.hour}
-                    onPress={() => agendar(props.item, item.hour)}
-                  />
-                )
-            )}
-          </View>
+                <View>
+
+                    <FlatList
+                        data={props.item.item.officeHour1}
+                        horizontal={true}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                    />
+                    <FlatList
+                        data={props.item.item.officeHour2}
+                        horizontal={true}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                    />
+                </View>
+
+            </View>
         </View>
-      </View>
-    </>
-  );
-};
+    );
+}
 
 const styles = StyleSheet.create({
-  container: {
-    borderColor: '#02456C',
-    marginBottom: 15,
-    borderRadius: 15,
-  },
-  containerWeek: {
-    marginBottom: 15,
-  },
-  containerDay: {
-    marginBottom: 5,
-  },
-  dayNumberSelected: {
-    marginLeft: 5,
-    color: '#02456C',
-    fontSize: 14,
-    letterSpacing: 2.1,
-  },
-  daySelected: {
-    marginLeft: 5,
-    color: '#2694A3',
-    fontSize: 18,
-    fontWeight: 'bold',
-    opacity: 1,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
+    container: {
+        borderColor: "#02456C",
+        marginBottom: 15,
+        borderRadius: 15
+    },
+    containerWeek: {
+        marginBottom: 15
+
+    },
+    containerDay: {
+        marginBottom: 5
+    },
+    dayNumberSelected: {
+        marginLeft: 5,
+        color: "#02456C",
+        fontSize: 14,
+        letterSpacing: 2.1
+    },
+    daySelected: {
+        marginLeft: 5,
+        color: "#2694A3",
+        fontSize: 18,
+        fontWeight: "bold",
+        opacity: 1
+    },
+
 });
 
 export default Weekschedule;
